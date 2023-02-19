@@ -1,24 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const App = props => {
 
 
   const [state, setState] = useState(props)
-  // stateの分割代入でstateの記述を短縮
   const {name , price } = state
 
-  // return (
-  //   <>
-  //     <p>現在の{state.name}は{state.price}円です。</p>
-  //     <button onClick={ () => setState({...state, price: state.price + 1}) }>+1</button>
-  //     <button onClick={ () => setState({...state, price: state.price - 1}) }>-1</button>
-  //     <button onClick={ () => setState(props) }>reset</button>
-  //     <input value={state.name} onChange={e => setState({...state, name: e.target.value})}/>
-  //   </>
-  // )
+  // class componentの作り方をfunciton componentで再現
 
+  // componentDidMount ＆ ompornentDidUpdate
+  useEffect(() => {
+    console.log('This is like componentDidMount or compornentDidUpdate.')
+  })
 
-  // onClickの中が変数だった物をオブジェクトで持たせる
+  // componentDidMount
+  useEffect(() => {
+    console.log('This is like componentDidMount')
+  },[])
+
+  // 特定のパラメータの描画時、変更時のみに実行させるための書き方
+  // (例)nameが描画や変更時に実行されるuseEffect
+  useEffect(() => {
+    console.log('This is callback is for name only')
+  },[name])
+
   return (
     <>
       <p>現在の{name}は{price}円です。</p>
